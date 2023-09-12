@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:insert="~{menu.html :: head}"></th:block>
+    </head>
+<body class="d-flex flex-column min-vh-100">        <!-- Navigation-->
+        <th:block th:insert="~{menu.html :: menu}"></th:block>
+        <!-- Mashead header-->
+        <section class="container px-5">
+			<div class="shadow p-3 mb-5 bg-white rounded">고쳐주세요. 오늘의 에러</div>
+			<div class="shadow p-3 mb-5 bg-white rounded">추천해요. 고칠 에러</div>
+			<div class="shadow p-3 mb-5 bg-white rounded">어려워요. 공부할 에러</div>
+			<div class="shadow p-3 mb-5 bg-white rounded">알아봐요. 신기한 에러</div>
+            
+        </section>
+        
+        <footer class="footer py-2 mt-auto">
+        	<th:block th:insert="~{menu.html :: footer}"></th:block>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:insert="~{menu.html :: head}"></th:block>
+<style type="text/css">
+div.minimalistBlack {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.divTable.minimalistBlack .divTableCell, .divTable.minimalistBlack .divTableHead
+	{
+	border-bottom: 1px solid #000000;
+	padding: 10px;
+}
+
+.divTable.minimalistBlack .divTableHeading {
+	border-bottom: 1px solid silver;
+	text-align: center;
+}
+
+.divTable.minimalistBlack .divTableHeading .divTableHead {
+	font-size: 15px;
+	font-weight: bold;
+	color: #000000;
+	text-align: center;
+}
+
+.minimalistBlack {
+	font-size: 14px;
+}
+
+.divTable {
+	display: table;
+}
+
+.divTableRow {
+	display: table-row;
+	padding: 0px 5px;
+}
+
+.divTableRow:hover {
+	background-color: #c1c1c1;
+}
+
+.divTableHeading {
+	display: table-header-group;
+}
+
+.divTableCell, .divTableHead {
+	display: table-cell;
+	text-align: center;
+}
+
+.divTableHeading {
+	display: table-header-group;
+}
+
+.divTableBody {
+	display: table-row-group;
+}
+
+.code {
+	text-align: left;
+}
+
+.shadow.p-3.mb-5.bg-white.rounded {
+	height: 500px;
+}
+
+.paging {
+	height: 38px;
+	margin-top: -20px;
+}
+</style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+	<!-- Navigation-->
+	<th:block th:insert="~{menu.html :: menu}"></th:block>
+	<!-- main -->
+	<section class="container px-5">
+
+		<div class="shadow p-3 mb-5 bg-white rounded">
+			<div th:if="${#lists.size(list) eq 0}">
+				<h2>데이터가 없습니다.</h2>
+				<h4>당신의 에러를 공유해주세요.</h4>
+			</div>
+			<div th:if="${#lists.size(list) ne 0}">
+				<!--	table	-->
+				<div class="divTable minimalistBlack">
+					<div class="divTableHeading">
+						<div class="divTableRow">
+							<div class="divTableHead">번호</div>
+							<div class="divTableHead">내용</div>
+							<div class="divTableHead">작성일</div>
+							<div class="divTableHead">좋아요</div>
+						</div>
+					</div>
+					<div class="divTableBody">
+						<div class="divTableRow" th:each="row : ${list}" th:onclick="|location.href='@{/detail(bno=${row.bno})}'|">
+							<div class="divTableCell" th:text="${row.bno}"></div>
+							<div class="divTableCell code">[[${#strings.abbreviate(row.code, 60)}]]<span th:if="${#lists.size(row.commentLists) gt 0}">[[${#lists.size(row.commentLists)}]]</span></div>
+							<div class="divTableCell" th:if="${#temporals.format(row.bdate,'yyyy-MM-dd') eq #dates.format(#calendars.createNow(),'yyyy-MM-dd')}">[[${#temporals.format(row.bdate,'HH:mm')}]]</div>
+							<div class="divTableCell" th:unless="${#temporals.format(row.bdate,'yyyy-MM-dd') eq #dates.format(#calendars.createNow(),'yyyy-MM-dd')}">[[${#temporals.format(row.bdate,'yyyy-MM-dd')}]]</div>
+							<div class="divTableCell" th:text="${row.blike}"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 페이징 -->
+		<div class="paging" th:if="${!list.isEmpty()}">
+			<ul class="pagination justify-content-center">
+				<li class="page-item" th:classappend="${!list.hasPrevious} ? 'disabled'">
+					<a class="page-link" th:href="@{|?pageNo=${pageNo-1}|}"><span><</span></a>
+				</li>
+				<li th:each="page : ${#numbers.sequence(1, list.totalPages)}" 
+					th:if="${page ge list.number-5 and page le list.number+5}"
+					th:classappend="${page - 1 == list.number} ? 'active'" class="page-item">
+					<a th:text="${page}" class="page-link" th:href="@{|?pageNo=${page}|}"></a>
+				</li>
+				<li class="page-item" th:classappend="${!list.hasNext} ? 'disabled'">
+					<a class="page-link" th:href="@{|?pageNo=${pageNo+1}|}"><span>></span></a>
+				</li>
+			</ul>
+		</div>
+		<!-- 페이징 -->
+
+
+		<button type="button" class="btn btn-success"
+			onclick="location.href='/write'">글쓰기</button>
+	</section>
+	<footer class="footer py-2 mt-auto">
+		<th:block th:insert="~{menu.html :: footer}"></th:block>
+	</footer>
+</body>
+</html>

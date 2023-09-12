@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<th:block th:fragment="head">
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="에러를 같이 고치는 사이트" />
+        <meta name="author" content="wisejia" />
+        <meta name="author" content="poseidon" />
+        <meta name="keyword" content="java, 자바, 에러, error">
+        <title>No error, No Code</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+	</th:block>
+
+<nav th:fragment="menu" class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+            <div class="container px-5">
+                <a class="navbar-brand fw-bold" href="/">에러가중계</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="bi-list"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                	 <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="/board">에러봐주세요</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="/HowToUse">사용방법</a></li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="/setup">설정</a></li>
+                    </ul>
+                    <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                        <span class="d-flex align-items-center">
+                            <i class="bi-chat-text-fill me-2"></i>
+                            <span class="small">로그인</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+	</nav>
+	
+<div th:fragment="footer" class="container px-5">
+		poseidon@카카오.닷컴
+		<!-- Bootstrap core JS-->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="JS/sb-forms-latest.js"></script>
+	</div>
+</body>
+</html>
